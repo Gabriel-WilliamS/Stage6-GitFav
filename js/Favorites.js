@@ -17,7 +17,7 @@ export class Favorites {
   async add(username) {
     try {
       const userExists = this.entries.find(
-        entry => entry.login.toUpperCase() === username.toUpperCase()
+        (entry) => entry.login.toUpperCase() === username.toUpperCase()
       );
       console.log(userExists);
       if (userExists) {
@@ -40,7 +40,7 @@ export class Favorites {
 
   delete(user) {
     const filteredEntreies = this.entries.filter(
-      entry => entry.login !== user.login
+      (entry) => entry.login !== user.login
     );
 
     this.entries = filteredEntreies;
@@ -65,11 +65,12 @@ export class FavoritesView extends Favorites {
     addButton.addEventListener("click", () => {
       const { value } = this.root.querySelector(".search input");
       this.add(value);
+      this.root.querySelector(".search input").value = "";
     });
   }
 
   removeAllTr() {
-    this.tbody.querySelectorAll("tr").forEach(tr => {
+    this.tbody.querySelectorAll("tr").forEach((tr) => {
       tr.remove();
     });
   }
@@ -89,7 +90,7 @@ export class FavoritesView extends Favorites {
   update() {
     this.removeAllTr();
 
-    this.entries.forEach(user => {
+    this.entries.forEach((user) => {
       const row = this.createRow();
 
       row.querySelector(
